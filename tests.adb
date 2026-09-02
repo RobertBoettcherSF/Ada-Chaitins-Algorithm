@@ -109,7 +109,7 @@ begin
       end loop;
       Check ("9.1 Spill count is exactly 1", Spill_Count = 1);
       Check ("9.2 Spilled node color is 0", 
-             (for all I in 1 .. 3 => (if Spills (I) then Allocation (I) = Spilled_Color)));
+             (for all I in Node_ID range 1 .. 3 => (if Spills (I) then Allocation (I) = Spilled_Color)));
       Check ("9.3 Colors are valid", 
              Spills (1) or else Allocation (1) /= Spilled_Color);
    end;
