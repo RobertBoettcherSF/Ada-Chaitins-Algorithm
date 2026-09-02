@@ -14,11 +14,11 @@ is
 
    type Node_Set is array (Node_ID) of Boolean
      with Default_Component_Value => False;
-   Empty_Node_Set : constant Node_Set := (others => False);
+   Empty_Node_Set : constant Node_Set := [others => False];
 
    type Allocation_Map is array (Node_ID) of Color_ID
      with Default_Component_Value => Spilled_Color;
-   Empty_Allocation : constant Allocation_Map := (others => Spilled_Color);
+   Empty_Allocation : constant Allocation_Map := [others => Spilled_Color];
 
    type Adjacency_Matrix is array (Node_ID, Node_ID) of Boolean
      with Default_Component_Value => False;
@@ -30,8 +30,8 @@ is
    type Interference_Graph is record
       Active_Node_Count : Node_Count := 0;
       Nodes             : Node_Set := Empty_Node_Set;
-      Edges             : Adjacency_Matrix := (others => (others => False));
-      Degrees           : Degree_Array := (others => 0);
+      Edges             : Adjacency_Matrix := [others => [others => False]];
+      Degrees           : Degree_Array := [others => 0];
    end record;
 
    Graph_Error : exception;
