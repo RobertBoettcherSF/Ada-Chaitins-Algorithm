@@ -95,7 +95,7 @@ begin
       end loop;
       Check ("8.2 Spill count is exactly 1", Spill_Count = 1);
       Check ("8.3 Unspilled have colors in 1..2", 
-             (not Spills (1) implies Allocation (1) in 1 .. 2));
+             Spills (1) or else Allocation (1) in 1 .. 2);
    end;
 
    -- TEST 9 — Triangle Graph with Spills (Briggs, K=2)
@@ -109,9 +109,9 @@ begin
       end loop;
       Check ("9.1 Spill count is exactly 1", Spill_Count = 1);
       Check ("9.2 Spilled node color is 0", 
-             (for all I in Node_ID range 1 .. 3 => (if Spills (I) then Allocation (I) = Spilled_Color)));
+             (for all I in 1 .. 3 => (if Spills (I) then Allocation (I) = Spilled_Color)));
       Check ("9.3 Colors are valid", 
-             (not Spills (1) implies Allocation (1) /= Spilled_Color));
+             Spills (1) or else Allocation (1) /= Spilled_Color);
    end;
 
    -- TEST 10 — Diamond Graph Basic Chaitin (A=1, B=2, C=3, D=4)
