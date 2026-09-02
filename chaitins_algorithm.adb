@@ -7,7 +7,7 @@ package body Chaitins_Algorithm is
    type Stack_Array is array (1 .. Maximum_Nodes) of Node_ID;
    
    type Node_Stack is record
-      Elements : Stack_Array := (others => 1);
+      Elements : Stack_Array := [others => 1];
       Top      : Node_Count := 0;
    end record;
 
@@ -50,8 +50,8 @@ package body Chaitins_Algorithm is
    begin
       Graph := (Active_Node_Count => Nodes, 
                 Nodes             => Empty_Node_Set,
-                Edges             => (others => (others => False)), 
-                Degrees           => (others => 0));
+                Edges             => [others => [others => False]], 
+                Degrees           => [others => 0]);
                 
       for I in 1 .. Nodes loop
          Graph.Nodes (Node_ID (I)) := True;
@@ -134,7 +134,7 @@ package body Chaitins_Algorithm is
       --  Phase 2: Select
       while Stack.Top > 0 loop
          Pop (Stack, Popped_Node);
-         Available := (others => True);
+         Available := [others => True];
 
          --  Find colors used by neighbors in the original graph
          for V in Node_ID loop
@@ -214,7 +214,7 @@ package body Chaitins_Algorithm is
       --  Phase 2: Select (Optimistic check)
       while Stack.Top > 0 loop
          Pop (Stack, Popped_Node);
-         Available := (others => True);
+         Available := [others => True];
 
          --  Check neighbor colors. Some might have been spilled or coalesced.
          for V in Node_ID loop
